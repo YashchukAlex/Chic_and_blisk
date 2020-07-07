@@ -1,21 +1,32 @@
-import React, { useState } from 'react';
-import { View, Text, FlatList, Dimensions } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, FlatList, Dimensions, TouchableOpacity } from 'react-native';
 import { SvgXml } from 'react-native-svg';
+import NavigationServices from '../navigationServices';
+
 const { height, width } = Dimensions.get('window');
+
 import constantStyles from '../constantsStyles';
 import IconArrowUp from '../../assets/Vector 3 (Stroke) Up.svg';
 import iconArrowDown from '../../assets/Vector 3 (Stroke) Down.svg';
 
 import SlidingUpPanel from 'rn-sliding-up-panel';
 
-export default () => {
+export let changeBottomRangeMenu = (number) => {};
+
+export let refSlidingUpPanel = null;
+
+export default (props) => {
   const [arrow, changeArrow] = useState(IconArrowUp);
+  const [bottomRange, changeBottomRange] = useState(100);
+  useEffect(() => {
+    changeBottomRangeMenu = changeBottomRange.bind(this);
+  }, []);
   const heightPanel = height / 2;
   return (
     <SlidingUpPanel
-      //ref={(c) => (this._panel = c)}
+      ref={(c) => (refSlidingUpPanel = c)}
       backdropOpacity={0}
-      draggableRange={{ top: heightPanel, bottom: 100 }}
+      draggableRange={{ top: heightPanel, bottom: bottomRange }}
       height={heightPanel}
       onDragStart={(value) => {
         changeArrow(IconArrowUp);
@@ -25,6 +36,7 @@ export default () => {
           changeArrow(iconArrowDown);
         }
       }}
+      friction={0.35}
       children={(dragHandler) => (
         <View style={styles.container} {...dragHandler}>
           <SvgXml width={30} height={40} xml={arrow} />
@@ -38,9 +50,15 @@ export default () => {
                       <Text style={styles.notificationText}>{item.notifications}</Text>
                     </View>
                   )}
-                  <View style={[styles.sectionItem, { backgroundColor: item.color }]}>
+                  <TouchableOpacity
+                    style={[styles.sectionItem, { backgroundColor: item.color }]}
+                    onPress={() => {
+                      NavigationServices.navigate(item.screen, { title: item.name });
+                      refSlidingUpPanel.hide();
+                    }}
+                  >
                     <Text style={styles.sectionItemText}>{item.name}</Text>
-                  </View>
+                  </TouchableOpacity>
                 </View>
               );
             }}
@@ -107,11 +125,11 @@ const styles = {
 };
 
 const sections = [
-  { name: 'Розділ 1', color: '#FFA3A3', notifications: 1 },
-  { name: 'Розділ 2', color: '#FFC194', notifications: 0 },
-  { name: 'Розділ 3', color: '#FDFF9A', notifications: 20 },
-  { name: 'Розділ 4', color: '#C9FF9E', notifications: 999 },
-  { name: 'Розділ 5', color: '#A5FAFF', notifications: 0 },
-  { name: 'Розділ 6', color: '#98A2FD', notifications: 0 },
-  { name: 'Розділ 7', color: '#E1A3FF', notifications: 0 },
+  { name: 'Картка', color: '#FFA3A3', screen: 'Card', notifications: 1 },
+  { name: 'Розділ 2', color: '#FFC194', screen: 'Section2', notifications: 0 },
+  { name: 'Розділ 3', color: '#FDFF9A', screen: 'Section3', notifications: 20 },
+  { name: 'Розділ 4', color: '#C9FF9E', screen: 'Section4', notifications: 999 },
+  { name: 'Розділ 5', color: '#A5FAFF', screen: 'Section5', notifications: 0 },
+  { name: 'Розділ 6', color: '#98A2FD', screen: 'Section6', notifications: 0 },
+  { name: 'Розділ 7', color: '#E1A3FF', screen: 'Section7', notifications: 0 },
 ];
