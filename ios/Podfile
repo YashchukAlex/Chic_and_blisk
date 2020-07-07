@@ -79,6 +79,8 @@ target 'Chic_and_blisk' do
 
   pod 'RNSVG', :path => '../node_modules/react-native-svg'
 
+  pod 'react-native-safe-area-context', :path => '../node_modules/react-native-safe-area-context'
+
   target 'Chic_and_bliskTests' do
     inherit! :complete
     # Pods for testing

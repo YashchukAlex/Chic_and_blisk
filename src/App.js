@@ -7,17 +7,15 @@
  */
 
 import React from 'react';
-import { SafeAreaView, StyleSheet, View, Text, StatusBar } from 'react-native';
-import SlidingUpPanel from './components/SlidingUpPanel';
-import MainScreen from './screens/main';
+import { StatusBar } from 'react-native';
+
+import NavigationContainer from '../src/routes';
 
 const App = () => {
   return (
     <>
       <StatusBar barStyle="light-content" />
-      {/* <SafeAreaView /> */}
-      <MainScreen />
-      <SlidingUpPanel />
+      <NavigationContainer />
     </>
   );
 };
