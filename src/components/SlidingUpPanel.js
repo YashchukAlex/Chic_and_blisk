@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, FlatList, Dimensions, TouchableOpacity } from 'react-native';
 import { SvgXml } from 'react-native-svg';
+import SoundPlayer from 'react-native-sound-player';
+
 import NavigationServices from '../navigationServices';
 
 const { height, width } = Dimensions.get('window');
@@ -65,6 +67,14 @@ export default (props) => {
             keyExtractor={(item, index) => index.toString()}
             horizontal
             showsHorizontalScrollIndicator={false}
+            //onScroll={() => {
+            // console.log();
+            // try {
+            //   SoundPlayer.playSoundFile('scroll', 'mp3');
+            // } catch (e) {
+            //   console.log('cannot play the sound file', e);
+            // }
+            //}}
           />
         </View>
       )}

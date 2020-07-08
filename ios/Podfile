@@ -81,6 +81,8 @@ target 'Chic_and_blisk' do
 
   pod 'react-native-safe-area-context', :path => '../node_modules/react-native-safe-area-context'
 
+  pod 'RNSoundPlayer', :path => '../node_modules/react-native-sound-player'
+
   target 'Chic_and_bliskTests' do
     inherit! :complete
     # Pods for testing
