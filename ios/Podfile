@@ -44,8 +44,8 @@ def flipper_post_install(installer)
   end
 end
 
-target 'Chic_and_blisk' do
-  # Pods for Chic_and_blisk
+target 'ShikiBlisk' do
+  # Pods for ShikiBlisk
   pod 'FBLazyVector', :path => "../node_modules/react-native/Libraries/FBLazyVector"
   pod 'FBReactNativeSpec', :path => "../node_modules/react-native/Libraries/FBReactNativeSpec"
   pod 'RCTRequired', :path => "../node_modules/react-native/Libraries/RCTRequired"
@@ -83,7 +83,7 @@ target 'Chic_and_blisk' do
 
   pod 'RNSoundPlayer', :path => '../node_modules/react-native-sound-player'
 
-  target 'Chic_and_bliskTests' do
+  target 'ShikiBliskTests' do
     inherit! :complete
     # Pods for testing
   end
@@ -100,10 +100,10 @@ target 'Chic_and_blisk' do
   end
 end
 
-target 'Chic_and_blisk-tvOS' do
-  # Pods for Chic_and_blisk-tvOS
+target 'ShikiBlisk-tvOS' do
+  # Pods for ShikiBlisk-tvOS
 
-  target 'Chic_and_blisk-tvOSTests' do
+  target 'ShikiBlisk-tvOSTests' do
     inherit! :search_paths
     # Pods for testing
   end

@@ -1,4 +1,4 @@
-package com.chic_and_blisk;
+package com.magisoftsolutions.shikiblisk;
 
 import com.facebook.react.ReactActivity;
 
@@ -10,6 +10,6 @@ public class MainActivity extends ReactActivity {
    */
   @Override
   protected String getMainComponentName() {
-    return "Chic_and_blisk";
+    return "ShikiBlisk";
   }
 }

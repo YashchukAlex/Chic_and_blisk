@@ -7,11 +7,11 @@
 #define TIMEOUT_SECONDS 600
 #define TEXT_TO_LOOK_FOR @"Welcome to React"
 
-@interface Chic_and_bliskTests : XCTestCase
+@interface ShikiBliskTests : XCTestCase
 
 @end
 
-@implementation Chic_and_bliskTests
+@implementation ShikiBliskTests
 
 - (BOOL)findSubviewInView:(UIView *)view matching:(BOOL(^)(UIView *view))test
 {

@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "Chic_and_blisk.app"
-               BlueprintName = "Chic_and_blisk"
-               ReferencedContainer = "container:Chic_and_blisk.xcodeproj">
+               BuildableName = "ShikiBlisk.app"
+               BlueprintName = "ShikiBlisk"
+               ReferencedContainer = "container:ShikiBlisk.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "Chic_and_bliskTests.xctest"
-               BlueprintName = "Chic_and_bliskTests"
-               ReferencedContainer = "container:Chic_and_blisk.xcodeproj">
+               BuildableName = "ShikiBliskTests.xctest"
+               BlueprintName = "ShikiBliskTests"
+               ReferencedContainer = "container:ShikiBlisk.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,9 +55,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "Chic_and_blisk.app"
-            BlueprintName = "Chic_and_blisk"
-            ReferencedContainer = "container:Chic_and_blisk.xcodeproj">
+            BuildableName = "ShikiBlisk.app"
+            BlueprintName = "ShikiBlisk"
+            ReferencedContainer = "container:ShikiBlisk.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -72,9 +72,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "Chic_and_blisk.app"
-            BlueprintName = "Chic_and_blisk"
-            ReferencedContainer = "container:Chic_and_blisk.xcodeproj">
+            BuildableName = "ShikiBlisk.app"
+            BlueprintName = "ShikiBlisk"
+            ReferencedContainer = "container:ShikiBlisk.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
