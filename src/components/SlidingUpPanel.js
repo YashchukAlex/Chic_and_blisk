@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { View, Text, FlatList, Dimensions, TouchableOpacity } from 'react-native';
 import { SvgXml } from 'react-native-svg';
 import SoundPlayer from 'react-native-sound-player';
@@ -24,6 +24,15 @@ export default (props) => {
     changeBottomRangeMenu = changeBottomRange.bind(this);
   }, []);
   const heightPanel = height / 2;
+  let firstRender = true;
+  const onViewableItemsChangedRef = useRef((viewableItems) => {
+    try {
+      !firstRender && SoundPlayer.playSoundFile('scroll2', '.mp3');
+    } catch (e) {
+      //console.log('cannot play the sound file', e);
+    }
+    firstRender = false;
+  });
   return (
     <SlidingUpPanel
       ref={(c) => (refSlidingUpPanel = c)}
@@ -67,14 +76,7 @@ export default (props) => {
             keyExtractor={(item, index) => index.toString()}
             horizontal
             showsHorizontalScrollIndicator={false}
-            //onScroll={() => {
-            // console.log();
-            // try {
-            //   SoundPlayer.playSoundFile('scroll', 'mp3');
-            // } catch (e) {
-            //   console.log('cannot play the sound file', e);
-            // }
-            //}}
+            onViewableItemsChanged={onViewableItemsChangedRef.current}
           />
         </View>
       )}
