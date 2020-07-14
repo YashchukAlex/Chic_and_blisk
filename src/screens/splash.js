@@ -1,5 +1,5 @@
 import React from 'react';
-import { Dimensions, ActivityIndicator, StyleSheet, Platform, View } from 'react-native';
+import { Dimensions, ActivityIndicator, StyleSheet, View } from 'react-native';
 import { SvgXml } from 'react-native-svg';
 
 const { height, width } = Dimensions.get('window');
@@ -20,7 +20,6 @@ const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
     justifyContent: 'center',
-    paddingTop: Platform.OS === 'ios' ? 30 : 0,
     backgroundColor: '#47233A',
     height: '100%',
   },

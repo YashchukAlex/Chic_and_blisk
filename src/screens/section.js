@@ -1,10 +1,10 @@
 import React from 'react';
-import { StyleSheet, View, Platform, Dimensions, Text, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Dimensions, Text, TouchableOpacity } from 'react-native';
 import { useRoute } from '@react-navigation/native';
 import { SvgXml } from 'react-native-svg';
 import Swiper from 'react-native-swiper';
 import NavigationServices from '../navigationServices';
-import { changeBottomRangeMenu } from '../components/SlidingUpPanel';
+import { changeBottomRangeMenu, refreshIconArrowMenu } from '../components/SlidingUpPanel';
 
 const { height, width } = Dimensions.get('window');
 
@@ -13,7 +13,7 @@ import opacityFlower from '../../assets/opacityFlower.svg';
 
 export default () => {
   const { params } = useRoute();
-  const headerHeight = Platform.OS === 'ios' ? 100 : 120;
+  const headerHeight = 100;
   return (
     <>
       <View style={styles.container}>
@@ -23,7 +23,7 @@ export default () => {
             {params.title}
           </Text>
         </View>
-        <View style={{ height: height - headerHeight - 100 }}>
+        <View style={{ height: height - headerHeight - 120 }}>
           <Swiper
             style={styles.slider}
             dot={
@@ -60,8 +60,9 @@ export default () => {
               <TouchableOpacity
                 style={styles.slide}
                 onPress={() => {
-                  NavigationServices.navigate('SectionDetails', { title: item.name });
+                  refreshIconArrowMenu();
                   changeBottomRangeMenu(0);
+                  NavigationServices.navigate('SectionDetails', { title: item.name });
                 }}
                 key={index}
               >
@@ -99,7 +100,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#47233A',
-    paddingTop: Platform.OS === 'ios' ? 30 : 0,
   },
   slider: {
     backgroundColor: '#FFF1FA',
@@ -124,7 +124,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     marginHorizontal: 50,
   },
-  iconInfo: { alignSelf: 'flex-end', marginRight: 20, marginTop: Platform.OS === 'android' ? 20 : 0 },
+  iconInfo: { alignSelf: 'flex-end', marginRight: 20 },
   backgroundFlower: {
     position: 'absolute',
     opacity: 0.5,

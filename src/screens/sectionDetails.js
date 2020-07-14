@@ -1,9 +1,9 @@
 import React, { useCallback } from 'react';
-import { StyleSheet, View, Platform, Dimensions, Text, TouchableWithoutFeedback } from 'react-native';
+import { StyleSheet, View, Dimensions, Text, TouchableOpacity } from 'react-native';
 import { SvgXml } from 'react-native-svg';
 import { useRoute } from '@react-navigation/native';
 import { useFocusEffect } from '@react-navigation/native';
-import GestureRecognizer, { swipeDirections } from 'react-native-swipe-gestures';
+import GestureRecognizer from 'react-native-swipe-gestures';
 
 import { refSlidingUpPanel, changeBottomRangeMenu } from '../components/SlidingUpPanel';
 import NavigationServices from '../navigationServices';
@@ -30,9 +30,9 @@ export default () => {
     <>
       <View style={styles.topBar}>
         <View style={styles.container}>
-          <TouchableWithoutFeedback onPress={() => NavigationServices.goBack()}>
-            <SvgXml width={30} height={30} xml={closeIcon} style={styles.icon} />
-          </TouchableWithoutFeedback>
+          <TouchableOpacity onPress={() => NavigationServices.goBack()} style={styles.icon}>
+            <SvgXml width={30} height={30} xml={closeIcon} />
+          </TouchableOpacity>
           <Text style={styles.title}>{params.title}</Text>
           <GestureRecognizer
             onSwipeDown={() => NavigationServices.goBack()}
@@ -55,7 +55,6 @@ const styles = StyleSheet.create({
   topBar: {
     flex: 1,
     backgroundColor: '#47233A',
-    paddingTop: Platform.OS === 'ios' ? 30 : 0,
   },
   container: {
     alignItems: 'center',
@@ -73,5 +72,7 @@ const styles = StyleSheet.create({
   icon: {
     alignSelf: 'flex-end',
     margin: 15,
+    backgroundColor: 'red',
+    padding: 15,
   },
 });

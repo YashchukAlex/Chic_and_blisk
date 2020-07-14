@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { View, Text, FlatList, Dimensions, TouchableOpacity } from 'react-native';
+import { View, Text, FlatList, Dimensions, Platform, PanResponder, Animated } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 import { SvgXml } from 'react-native-svg';
 import SoundPlayer from 'react-native-sound-player';
 
@@ -14,18 +15,39 @@ import iconArrowDown from '../../assets/Vector 3 (Stroke) Down.svg';
 import SlidingUpPanel from 'rn-sliding-up-panel';
 
 export let changeBottomRangeMenu = (number) => {};
+export let refreshIconArrowMenu = () => {};
 
 export let refSlidingUpPanel = null;
 
+let panResponder = {};
+
 export default (props) => {
+  const _onGrant = () => {
+    changeDragPanel(false);
+    return true;
+  };
+  const _onRelease = () => {
+    changeDragPanel(true);
+  };
+  const _refreshIconArrow = () => {
+    changeArrow(IconArrowUp);
+  };
   const [arrow, changeArrow] = useState(IconArrowUp);
   const [bottomRange, changeBottomRange] = useState(100);
+  const [dragPanel, changeDragPanel] = useState(true);
   useEffect(() => {
     changeBottomRangeMenu = changeBottomRange.bind(this);
+    refreshIconArrowMenu = _refreshIconArrow.bind(this);
+    Platform.OS === 'ios' &&
+      (panResponder = PanResponder.create({
+        onMoveShouldSetPanResponder: _onGrant.bind(this),
+        onPanResponderRelease: _onRelease.bind(this),
+        onPanResponderTerminate: _onRelease.bind(this),
+      }));
   }, []);
   const heightPanel = height / 2;
   let firstRender = true;
-  const onViewableItemsChangedRef = useRef((viewableItems) => {
+  const _onViewableItemsChangedRef = useRef((viewableItems) => {
     try {
       !firstRender && SoundPlayer.playSoundFile('scroll2', '.mp3');
     } catch (e) {
@@ -36,18 +58,25 @@ export default (props) => {
   return (
     <SlidingUpPanel
       ref={(c) => (refSlidingUpPanel = c)}
+      allowDragging={Platform.OS === 'ios' ? dragPanel : true}
       backdropOpacity={0}
       draggableRange={{ top: heightPanel, bottom: bottomRange }}
       height={heightPanel}
-      onDragStart={(value) => {
-        changeArrow(IconArrowUp);
-      }}
-      onMomentumDragEnd={(value) => {
-        if (value > heightPanel - 10) {
+      onDragEnd={(value) => {
+        if (value < 120) {
+          changeArrow(IconArrowUp);
+        } else if (value > heightPanel - 20) {
           changeArrow(iconArrowDown);
         }
       }}
-      friction={0.35}
+      onMomentumDragEnd={(value) => {
+        if (value < 120) {
+          changeArrow(IconArrowUp);
+        } else if (value > heightPanel - 20) {
+          changeArrow(iconArrowDown);
+        }
+      }}
+      friction={0.1}
       children={(dragHandler) => (
         <View style={styles.container} {...dragHandler}>
           <SvgXml width={30} height={40} xml={arrow} />
@@ -64,8 +93,9 @@ export default (props) => {
                   <TouchableOpacity
                     style={[styles.sectionItem, { backgroundColor: item.color }]}
                     onPress={() => {
+                      //refreshIconArrowMenu();
+                      //refSlidingUpPanel.hide();
                       NavigationServices.navigate(item.screen, { title: item.name });
-                      refSlidingUpPanel.hide();
                     }}
                   >
                     <Text style={styles.sectionItemText}>{item.name}</Text>
@@ -76,7 +106,8 @@ export default (props) => {
             keyExtractor={(item, index) => index.toString()}
             horizontal
             showsHorizontalScrollIndicator={false}
-            onViewableItemsChanged={onViewableItemsChangedRef.current}
+            onViewableItemsChanged={_onViewableItemsChangedRef.current}
+            {...panResponder.panHandlers}
           />
         </View>
       )}

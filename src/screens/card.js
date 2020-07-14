@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Platform, Dimensions, Text } from 'react-native';
+import { StyleSheet, View, Dimensions, Text } from 'react-native';
 import { SvgXml } from 'react-native-svg';
 
 const { height, width } = Dimensions.get('window');
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
     backgroundColor: '#47233A',
-    paddingTop: Platform.OS === 'ios' ? height * 0.08 + 30 : height * 0.08,
+    paddingTop: height * 0.05,
   },
   cardContainer: {
     backgroundColor: 'white',
